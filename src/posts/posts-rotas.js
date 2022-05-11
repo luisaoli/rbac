@@ -6,21 +6,21 @@ module.exports = app => {
   app
     .route('/post')
     .get(
-      [middlewaresAutenticacao.bearer, autorizacao(['admin', 'editor', 'assinante'])],
+      middlewaresAutenticacao.bearer, 
       postsControlador.lista
     )
     .post(
-      [middlewaresAutenticacao.bearer, autorizacao(['admin', 'editor'])],
+      [middlewaresAutenticacao.bearer, autorizacao('post', 'criar')],
       postsControlador.adiciona
     )
 
   app.route('/post/:id')
     .get(
-      [middlewaresAutenticacao.bearer, autorizacao(['admin', 'editor', 'assinante'])],
+      [middlewaresAutenticacao.bearer, autorizacao('post', 'ler')],
       postsControlador.obterDetalhes
     )
     .delete(
-      [middlewaresAutenticacao.bearer, autorizacao(['admin', 'editor'])],
+      [middlewaresAutenticacao.bearer, autorizacao('post', 'remover')],
       postsControlador.remover
     )
 }
